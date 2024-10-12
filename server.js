@@ -13,7 +13,7 @@ app.use(bodyParser.json()); // Parse JSON bodies
 
 // Serve the login page
 app.get('/', (req, res) => {
-    res.sendFile(path.join('https://callschedule.onrender.com','website.html'));
+    res.sendFile(path.join(__dirname,'main','website.html'));
 });
 
 // Email sending endpoint
