@@ -52,6 +52,6 @@ app.post('/send-email', async (req, res) => {
 });
 
 // Start the server on port 10000
-app.listen(10000, () => {
-    console.log('Server is running on port 10000');
+app.listen(8080, () => {
+    console.log('Server is running on port 8080');
 });
