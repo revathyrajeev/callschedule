@@ -3,7 +3,7 @@ const express = require('express');
 const nodemailer = require('nodemailer');
 const path = require('path');
 const bodyParser = require('body-parser');
-require('dotenv').config(); // Load environment variables from .env file
+require('dotenv').config(); // Load environment variables from .env fil
 
 const app = express();
 const PORT = process.env.PORT || 3000; 
@@ -14,7 +14,7 @@ app.use(bodyParser.json()); // Parse JSON bodies
 
 // Serve the login page
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'dashboard.html'));
+    res.sendFile(path.join(__dirname, 'public', 'website.html'));
 });
 
 // Email sending endpoint
