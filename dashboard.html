@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input, button {
+            padding: 8px;
+            margin: 5px 0;
+        }
+        #scheduleInfo {
+            margin-top: 20px;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="greeting"></h1>
+    <h2>Schedule a Call</h2>
+    <form id="scheduleForm">
+        <label for="date">Select Date:</label>
+        <input type="date" id="date" required>
+        <label for="time">Select Time:</label>
+        <input type="time" id="time" required>
+        <button type="submit">Schedule</button>
+    </form>
+    <div id="scheduleInfo"></div>
+
+    <script>
+        const username = localStorage.getItem('username') || 'Guest';
+        document.getElementById('greeting').textContent = `Hi ${username}`;
+
+        document.getElementById('scheduleForm').onsubmit = async function(event) {
+            event.preventDefault();
+            const date = new Date(document.getElementById('date').value);
+            const time = document.getElementById('time').value;
+            const scheduledTime = new Date(`${date.toISOString().split('T')[0]}T${time}`);
+
+            if (scheduledTime <= new Date()) {
+                alert('Please select a future date and time.');
+                return;
+            }
+
+            document.getElementById('scheduleInfo').innerHTML = `Scheduled for ${date.toLocaleDateString()} at ${time} for ${username}.`;
+            document.getElementById('scheduleForm').reset(); // Clear the form
+
+            // Send email notification
+            try {
+                const response = await fetch('http://localhost:3000/send-email', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ date: date.toLocaleDateString(), time, username }),
+                });
+
+                const result = await response.text();
+                alert(result);
+            } catch (error) {
+                console.error('Error sending email:', error);
+            }
+        }
+    </script>
+</body>
+</html>
