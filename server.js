@@ -1,9 +1,8 @@
-
 const express = require('express');
 const nodemailer = require('nodemailer');
 const path = require('path');
 const bodyParser = require('body-parser');
-require('dotenv').config(); // Load environment variables from .env fil
+require('dotenv').config(); // Load environment variables from .env file
 
 const app = express();
 const PORT = process.env.PORT || 3000; 
@@ -47,6 +46,7 @@ app.post('/send-email', (req, res) => {
     });
 });
 
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+// Listen on port and 0.0.0.0
+app.listen(PORT, "0.0.0.0", () => {
+    console.log(`Server is running on http://0.0.0.0:${PORT}`);
 });
