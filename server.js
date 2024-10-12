@@ -18,8 +18,7 @@ app.get('/', (req, res) => {
 app.get('/dashboard', (req, res) => {
     res.sendFile(path.join(__dirname, 'main', 'dashboard.html'));
 });
- app.post('/login', (req, res) => {
-    const { username, password } = req.body;
+
 
 // Email sending endpoint
 app.post('/send-email', (req, res) => {
