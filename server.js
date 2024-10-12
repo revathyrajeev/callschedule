@@ -14,7 +14,7 @@ app.use(bodyParser.json()); // Parse JSON bodies
 
 // Serve the login page
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'website.html'));
+    res.sendFile(path.join(__dirname, 'public', 'dashboard.html'));
 });
 
 // Email sending endpoint
