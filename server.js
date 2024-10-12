@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 require('dotenv').config(); // Load environment variables from .env file
 
 const app = express();
-const PORT = process.env.PORT || 10000; 
+const PORT = process.env.PORT || 8080; 
 
 // Middleware
 app.use(express.static('public'));
@@ -13,7 +13,7 @@ app.use(bodyParser.json()); // Parse JSON bodies
 
 // Serve the login page
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'website.html'));
+    res.sendFile(path.join('main', 'public', 'website.html'));
 });
 
 // Email sending endpoint
@@ -51,4 +51,4 @@ app.listen(PORT, "0.0.0.0", () => {
     console.log(`Server is running on http://0.0.0.0:${PORT}`);
 });
 
-server.keepAliveTimeout = 120000;
+
