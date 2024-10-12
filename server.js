@@ -13,11 +13,11 @@ const app = express();
 app.use(bodyParser.json());
 
 // Serve static files from the 'public' directory
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'main')));
 
 // Serve the login page (website.html)
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'website.html'));
+    res.sendFile(path.join(__dirname, 'main', 'website.html'));
 });
 
 // Route to handle sending emails
