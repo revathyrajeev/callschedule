@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 require('dotenv').config(); // Load environment variables from .env file
 
 const app = express();
-const PORT = process.env.PORT || 3000; // Use the PORT from environment variables or default to 3000
+const PORT = process.env.PORT || 3000; 
 
 // Middleware
 app.use(express.static('public'));
