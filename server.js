@@ -15,10 +15,15 @@ app.use(bodyParser.json()); // Parse JSON bodies
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname,'main','website.html'));
 });
+app.get('/dashboard', (req, res) => {
+    res.sendFile(path.join(__dirname, 'main', 'dashboard.html'));
+});
 
 // Email sending endpoint
 app.post('/send-email', (req, res) => {
     const { date, time, username } = req.body;
+    app.post('/login', (req, res) => {
+    const { username, password } = req.body;
 
     // Set up transporter
     const transporter = nodemailer.createTransport({
