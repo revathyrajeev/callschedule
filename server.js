@@ -12,16 +12,16 @@ app.use(express.static('public'));
 app.use(bodyParser.json()); // Parse JSON bodies
 
 // Serve the login page
-app.get('/', (req, res) => {
+app.get('https://callschedule.onrender.com/', (req, res) => {
     res.sendFile(path.join(__dirname,'main','website.html'));
 });
-app.get('/dashboard', (req, res) => {
+app.get('https://callschedule.onrender.com/dashboard', (req, res) => {
     res.sendFile(path.join(__dirname, 'main', 'dashboard.html'));
 });
 
 
 // Email sending endpoint
-app.post('/send-email', (req, res) => {
+app.post('https://callschedule.onrender.com/send-email', (req, res) => {
     const { date, time, username } = req.body;
    
 
