@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 
 // Route to serve the login page (website.html)
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'website.html'));
+    res.sendFile(path.join(__dirname,'public','website.html'));
 });
 
 // Route to handle sending emails when a call is scheduled
