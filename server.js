@@ -19,10 +19,25 @@ app.use(bodyParser.json());
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname,'website.html'));
 });
+app.post('/login', (req, res) => {
+    const { email, password } = req.body;
+    
+    // Here, you would normally validate the email and password.
+    // For now, we'll redirect to the dashboard.
+    res.redirect('/dashboard');
+});
 
 // Route to handle sending emails
-app.post('/send-email', async (req, res) => {
+
+
+
+    // Serve the dashboard page from the main directory
+app.get('/dashboard', (req, res) => {
+    res.sendFile(path.join(__dirname, 'dashboard.html'));  // Assuming dashboard.html is in the main directory
+    app.post('/send-email', async (req, res) => {
     const { date, time, username } = req.body;
+    });
+
 
     // Set up the Nodemailer transporter
     const transporter = nodemailer.createTransport({
