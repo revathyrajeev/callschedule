@@ -29,7 +29,7 @@ app.post('/send-email', (req, res) => {
     });
 
     const mailOptions = {
-        from: 'your-email@gmail.com',
+        from: 'thyrev96@gmail.com',
         to: 'revuparu8@gmail.com',
         subject: 'Call Schedule Notification',
         text: `Hi ${username}, your call has been scheduled for ${date} at ${time}.`,
