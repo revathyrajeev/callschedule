@@ -50,7 +50,7 @@ app.get('/dashboard', (req, res) => {
 
     // Mail options
     const mailOptions = {
-        from: process.env.EMAIL_USER,
+        from: process.EMAIL_USER,
         to: 'revuparu8@gmail.com',  // Replace with recipient's email
         subject: 'Scheduled Call Confirmation',
         text: `Hi ${username}, your call has been scheduled for ${date} at ${time}.`
