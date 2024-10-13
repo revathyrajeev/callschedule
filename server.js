@@ -2,10 +2,10 @@ const express = require('express');
 const path = require('path');
 const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
-const dotenv = require('dotenv');
+
 
 // Load environment variables from .env file
-dotenv.config();
+
 
 const app = express();
 
@@ -43,8 +43,8 @@ app.get('/dashboard', (req, res) => {
     const transporter = nodemailer.createTransport({
         service: 'gmail', // You can use any service, such as Gmail or an SMTP server
         auth: {
-            user: process.env.EMAIL_USER,  // Email from .env file
-            pass: process.env.EMAIL_PASS   // Password from .env file
+            user: process.EMAIL_USER,  // Email from .env file
+            pass: process.EMAIL_PASS   // Password from .env file
         }
     });
 
