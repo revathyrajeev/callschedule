@@ -5,6 +5,7 @@
   "main": "server.js", 
   "scripts": {
     "install:prod": "npm install --omit=dev",
+    "install:prod": "express nodemailer body-parser",
     "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
