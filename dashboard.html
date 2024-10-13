@@ -9,21 +9,6 @@
             font-family: Arial, sans-serif;
             padding: 20px;
         }
-        h1 {
-            color: #333;
-        }
-        label {
-            display: block;
-            margin: 10px 0 5px;
-        }
-        input, button {
-            padding: 8px;
-            margin: 5px 0;
-        }
-        #scheduleInfo {
-            margin-top: 20px;
-            color: green;
-        }
     </style>
 </head>
 <body>
@@ -44,27 +29,18 @@
 
         document.getElementById('scheduleForm').onsubmit = async function(event) {
             event.preventDefault();
-            const date = new Date(document.getElementById('date').value);
+            const date = document.getElementById('date').value;
             const time = document.getElementById('time').value;
-            const scheduledTime = new Date(`${date.toISOString().split('T')[0]}T${time}`);
 
-            if (scheduledTime <= new Date()) {
-                alert('Please select a future date and time.');
-                return;
-            }
+            document.getElementById('scheduleInfo').innerHTML = `Scheduled for ${date} at ${time}.`;
 
-            document.getElementById('scheduleInfo').innerHTML = `Scheduled for ${date.toLocaleDateString()} at ${time} for ${username}.`;
-            document.getElementById('scheduleForm').reset();
-
-            // Send email notification
             try {
-            
-                const response = await fetch('http://localhost.com:10000/send-email', {
+                const response = await fetch('/send-email', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ date: date.toLocaleDateString(), time, username }),
+                    body: JSON.stringify({ date, time, username }),
                 });
 
                 const result = await response.text();
