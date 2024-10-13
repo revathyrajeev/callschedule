@@ -23,13 +23,13 @@ app.post('/send-email', (req, res) => {
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: process.env.GMAIL_USER, // Environment variable for Gmail user
-            pass: process.env.GMAIL_PASS, // Environment variable for Gmail password
+            user: process.env.EMAIL_USER, // Environment variable for Gmail user
+            pass: process.env.EMAIL_PASS, // Environment variable for Gmail password
         },
     });
 
     const mailOptions = {
-        from: process.env.GMAIL_USER,  // Sender address
+        from: process.env.EMAIL_USER,  // Sender address
         to: 'revuparu8@gmail.com',     // Recipient email address
         subject: 'Call Schedule Notification',
         text: `Hi ${username}, your call has been scheduled for ${date} at ${time}.`,
