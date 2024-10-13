@@ -1,72 +1,52 @@
 const express = require('express');
-const path = require('path');
 const nodemailer = require('nodemailer');
+const path = require('path');
 const bodyParser = require('body-parser');
 
-
-// Load environment variables from .env file
-
-
 const app = express();
+const PORT = 10000;
 
-// Middleware to parse JSON request bodies
+// Middleware for serving static files and parsing JSON
+app.use(express.static('public'));
 app.use(bodyParser.json());
 
-// Serve static files from the 'public' directory
-//app.use(express.static(path.join(__dirname, 'main')));
-
-// Serve the login page (website.html)
+// Route to serve the login page (website.html)
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname,'website.html'));
-});
-app.post('/login', (req, res) => {
-    const { email, password } = req.body;
-    
-    // Here, you would normally validate the email and password.
-    // For now, we'll redirect to the dashboard.
-    res.redirect('/dashboard');
+    res.sendFile(path.join(__dirname, 'website.html'));
 });
 
-// Route to handle sending emails
-
-
-
-    // Serve the dashboard page from the main directory
-app.get('/dashboard', (req, res) => {
-    res.sendFile(path.join(__dirname, 'dashboard.html'));  // Assuming dashboard.html is in the main directory
-    app.post('/send-email', async (req, res) => {
+// Route to handle sending emails when a call is scheduled
+app.post('/send-email', (req, res) => {
     const { date, time, username } = req.body;
-    });
 
-
-    // Set up the Nodemailer transporter
+    // Email transport configuration
     const transporter = nodemailer.createTransport({
-        service: 'gmail', // You can use any service, such as Gmail or an SMTP server
+        service: 'gmail',
         auth: {
-            user: process.EMAIL_USER,  // Email from .env file
-            pass: process.EMAIL_PASS   // Password from .env file
-        }
+            user: 'thyrev96@gmail.com', // Replace with your email
+            pass: '417R347a',  // Replace with your email password or app password
+        },
     });
 
-    // Mail options
     const mailOptions = {
-        from: process.EMAIL_USER,
-        to: 'revuparu8@gmail.com',  // Replace with recipient's email
-        subject: 'Scheduled Call Confirmation',
-        text: `Hi ${username}, your call has been scheduled for ${date} at ${time}.`
+        from: 'your-email@gmail.com',
+        to: 'revuparu8@gmail.com',
+        subject: 'Call Schedule Notification',
+        text: `Hi ${username}, your call has been scheduled for ${date} at ${time}.`,
     };
 
-    try {
-        // Send the email
-        await transporter.sendMail(mailOptions);
-        res.send('Email sent successfully!');
-    } catch (error) {
-        console.error('Error sending email:', error);
-        res.status(500).send('Failed to send email.');
-    }
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.error('Error sending email:', error);
+            res.status(500).send('Error sending email.');
+        } else {
+            console.log('Email sent:', info.response);
+            res.send('Email notification sent successfully.');
+        }
+    });
 });
 
-// Start the server on port 10000
-app.listen(8080, () => {
-    console.log('Server is running on port 8080');
+// Start the server
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
 });
